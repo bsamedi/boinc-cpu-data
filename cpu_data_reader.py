@@ -1,7 +1,8 @@
 import re
 
 def parse_cpu_description(desc):
-    g = re.match('(\S+)? (.+?)?(?: @ ([0-9.]+[MGTP]Hz))? \[Family (\S+)? Model (\S+)? Stepping (\S+)?\]', desc)
+    g = re.match('(?:(\S+)? (.+?)?(?: @ ([0-9.]+[MGTP]Hz))? \[Family (\S+)? Model (\S+)? Stepping (\S+)?\])?', desc)
+    #                 Make   Name        Frequency
     return {
         'Make': g.group(1),
         'Name': g.group(2),

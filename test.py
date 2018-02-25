@@ -2,8 +2,8 @@
 import unittest
 import cpu_data_reader
 
-class t(unittest.TestCase):
-    def test_intel_line(self):
+class test_cpu_desc_parser(unittest.TestCase):
+    def test_intel(self):
         input = 'Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz [Family 6 Model 142 Stepping 9]'
         expected = {
             'Make': 'Intel(R)',
@@ -17,7 +17,7 @@ class t(unittest.TestCase):
         found = cpu_data_reader.parse_cpu_description(input)
         self.assertEqual(found, expected)
 
-    def test_amd_line(self):
+    def test_amd(self):
         input = 'AMD FX(tm)-9590 Eight-Core Processor [Family 21 Model 2 Stepping 0]'
         expected = {
             'Make': 'AMD',
@@ -31,6 +31,19 @@ class t(unittest.TestCase):
         found = cpu_data_reader.parse_cpu_description(input)
         self.assertEqual(found, expected)
 
+    def test_trash(self):
+        input = 'trash trash trash'
+        expected = {
+            'Make': None,
+            'Name': None,
+            'Frequency': None,
+            'Family': None,
+            'Model': None,
+            'Steppping': None,
+            'original_text': input
+        }
+        found = cpu_data_reader.parse_cpu_description(input)
+        self.assertEqual(found, expected)
 
 if __name__ == '__main__':
     unittest.main()
