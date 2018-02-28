@@ -25,7 +25,7 @@ class TableParser:
         tbl = soup.find('table', class_='table table-condensed ')
         for tr in tbl.tbody.find_all('tr'):
             s = '\t'.join( [td.string for td in tr.find_all( re.compile('td|th'))] )
-            yield s
+            yield s + '\n'
 
 if __name__ == "__main__":
     app.run()
