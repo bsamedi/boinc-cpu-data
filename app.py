@@ -1,15 +1,23 @@
 #!/usr/bin/python
 
 import web
-import urllib2
 import bs4
-import cpu_data_reader
+import urllib2
 import re
+import os
 
-urls = ("/.*", "hello")
-app = web.application(urls, globals())
+urls = ("/.*", "TableParser")
 
-class hello:
+class MyApplication(web.application):
+    def run(self, port=None, *middleware):
+        func = self.wsgifunc(*middleware)
+        if port == None:
+            port = int(os.environ['PORT'])
+        return web.httpserver.runsimple(func, ('0.0.0.0', port))
+
+app = MyApplication(urls, globals())
+
+class TableParser:
     def GET(self):
         web.header('Content-Type', 'text/plain')
         response = urllib2.urlopen('https://boinc.bakerlab.org/rosetta/cpu_list.php')
