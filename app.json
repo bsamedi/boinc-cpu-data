@@ -1,0 +1,21 @@
+{
+  "name": "Boinc CPU Statistics Data Pipe",
+  "description": "Pipes data from https://boinc.bakerlab.org/rosetta/cpu_list.php as a plain tab-separated values text",
+  "image": "heroku/python",
+  "repository": "https://github.com/bsamedi/boinc-cpu-data.git",
+  "keywords": ["python", "web.py" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    }
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python manage.py collectstatic --noinput",
+        "test": "python manage.py test"
+      }
+    }
+  }
+}
