@@ -1,9 +1,8 @@
 #!/usr/bin/python
 
 import web
-import urllib2
 import bs4
-import cpu_data_reader
+import urllib2
 import re
 
 urls = ("/.*", "hello")
